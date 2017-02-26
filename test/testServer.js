@@ -1,5 +1,8 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
+var cors = require('cors');
+
+app.use(cors());
 
 app.use(function (req, res, next) {
   // Simulate real DB reads or network latency
@@ -16,11 +19,11 @@ function getRandom(type) {
   var price =  Math.round(Math.random() * (10000 - 75000) + 75000);
   this.price = [price];
   this.number = [number];
-  this.location = ["Joe's Speedway", "Daytona", "Lime Rock Park"];
-  this.firstName = ["John", "Steve", "Joe", "Ben", "Jake", "Pablo", "Ted", "Bill", "Aaron", "Chris", "Sean", "Jorge"];
-  this.lastName = ["Jefferson", "Smith", "Johnson", "Paul", "Washington", "Hamilton"];
-  this.admin = ["Admin1", "Admin2", "Admin3"];
-  this.car = ["Nissan 240sx", "Nissan 350z", "Toyota AE86", "Mazda RX8", "Mazda RX7"];
+  this.location = ["New Hampshire MotorSpeeday", "Daytona International Speedway", "Lime Rock Park", "Nurburgring", "Mazda Raceway Laguna Seca", "Circuit de la Sarthe"];
+  this.firstName = ["George", "John", "Thomas", "James", "Andrew", "Martin", "William", "Zachary", "Franklin", "Grover", "Benjamin"];
+  this.lastName = ["Washington", "Adams", "Jefferson", "Polk", "Jackson", "Van Buren", "Tyler", "Taylor", "Pierce", "Johnson", "Garfield"];
+  this.admin = ["Richard Petty", "Jeff Gordon", "Mario Andretti", "Danica Patrick"];
+  this.car = ["Nissan 240sx", "Nissan 350z", "Toyota AE86", "Mazda RX8", "Mazda RX7", "BMW E30", "BMW 325i"];
   return this[type][Math.floor(Math.random() * this[type].length)];
 }
 
@@ -29,10 +32,10 @@ function getDriver(num = 1, driverId = null) {
   var isManualAdd = Math.random() >= 0.5;
   var firstName = getRandom("firstName");
   return {
-    _id: driverId || String(num),
+    id: String(driverId),
     firstName: firstName,
     lastName: getRandom("lastName"),
-    zipCode: "02379",
+    zipCode: "02323",
     emailAddress: firstName + "@example.com",
     car: getRandom("car"),
     isManualAdd: isManualAdd,
@@ -44,9 +47,9 @@ function getDriver(num = 1, driverId = null) {
 }
 
 function getEvent(num, drivers, eventId = null) {
-  num = num || 1;
   return {
-    _id: eventId || String(num),
+    name: "TestEvent",
+    id: eventId || String(num),
     date: getDate(num),
     location: getRandom("location"),
     advancePrice: 7500,
@@ -54,7 +57,11 @@ function getEvent(num, drivers, eventId = null) {
     registrationStartDate: getDate(0),
     registrationEndDate: getDate(num),
     facebookPage: "https://www.facebook.com",
+    isPartOfBundle: false,
+    bundleRef: [],
+    bundleDiscount: 0,
     driverLimit: 40,
+    driverLimitReached: false,
     driverCount: drivers.length,
     drivers: drivers
   }
@@ -76,7 +83,7 @@ function getEventWithDrivers(numEvents, numDrivers, id = null) {
   for(var i=0, l=arr.length; i<l; i++) {
     var drivers = [];
     for(var d=0, len=numDrivers; d<len; d++) {
-      drivers.push(getDriver(arr[i]));
+      drivers.push(getDriver(arr[i], d));
     }
     events.push(getEvent(arr[i], drivers, id));
   }
@@ -138,6 +145,19 @@ app.get('/api/drivers/:id', function(req, res) {
 });
 
 
+app.get('/fetch/events/:id', function(req, res) {
+  var event1 = getEventWithDrivers(1, 0, req.params.id);
+  var event2 = getEventWithDrivers(1, 0, String(parseInt(req.params.id) + 1));
+  var event3 = getEventWithDrivers(1, 0, String(parseInt(req.params.id) - 1));
+  var obj = {}
+  obj.event = event1[0];
+  obj.bundled = [event2[0], event3[0]];
+  res.json(
+    getResponseObject(200, [obj])
+  );
+});
+
+
 app.post('/api/drivers', function(req, res) {
   var errors = getPostObject(getDriver(), req.query);
   if(errors.length < 1) {
@@ -174,4 +194,4 @@ app.post('/api/events', function(req, res) {
 // driver new
 
 
-app.listen(3000)
+app.listen(8080)
