@@ -1,0 +1,10 @@
+.login-form {
+  display: table;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.login-header {
+  padding: 20px;
+  text-align: center;
+}

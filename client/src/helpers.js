@@ -1,4 +1,4 @@
-export const baseUrl = () => "http://localhost:8080";
+export const baseUrl = () => "http://localhost:8989";
 
 export function formatDate(date) {
   const d = new Date(date),

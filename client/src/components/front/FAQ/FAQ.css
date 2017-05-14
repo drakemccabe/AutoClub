@@ -1,0 +1,70 @@
+.bb {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.faq-select {
+  display: table;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  color: black;
+}
+
+.b--black-10 {
+    border-color: rgba(0, 0, 0, .1);
+}
+
+.db {
+    display: block;
+}
+
+.lh-copy {
+    line-height: 1.5;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.pa3 {
+    padding: 1rem;
+}
+
+.pl0 {
+    padding-left: 0;
+}
+
+.mb1 {
+    margin-bottom: .25rem;
+}
+
+.f3 {
+    font-size: 1.5rem;
+}
+
+.f5 {
+    font-size: 1rem;
+}
+
+.measure {
+    max-width: 30em;
+}
+
+@media screen and (min-width: 30em) {
+    .pa4-ns {
+        padding: 2rem;
+    }
+}
+
+.select-label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.select-container {
+  display: table;
+  width: 50%;
+  margin: 0 auto;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { formatDate } from "../../../helpers";
+import "./EventTeaser.css";
 
 class EventTeaser extends Component {
 
@@ -9,9 +10,8 @@ class EventTeaser extends Component {
   }
 
   rediectToEvent(event) {
-    console.log(this);
     event.preventDefault();
-    const eventId = this.props.details.id;
+    const eventId = this.props.details._id;
     this.context.router.transitionTo(`/events/${eventId}`);
   }
 
@@ -20,11 +20,11 @@ class EventTeaser extends Component {
     const { details} = this.props;
 
     return (
-      <li>
-        <h2>{details.name}</h2>
-        <p>{details.location}</p>
-        <p>{formatDate(details.date)}</p>
-        <a onClick={this.rediectToEvent} href="#">Go To Event</a>
+      <li className="pa3 pa4-ns bb b--black-10">
+        <a onClick={this.rediectToEvent} href="#">
+          <b className="db f3 mb1">{details.name}</b>
+          <span className="f5 db lh-copy measure">{formatDate(details.date)}</span>
+        </a>
       </li>
     );
   }

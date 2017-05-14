@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { baseUrl } from '../../../helpers';
+import Nav from "../Nav/Nav";
+import MessageBox from '../MessageBox/MessageBox';
 import EventDetail from '../EventDetail/EventDetail';
 import EventBundle from '../EventBundle/EventBundle';
 
@@ -32,9 +34,8 @@ class EventShow extends Component {
   render() {
     return (
       <div>
-        <div className="error" style={{ display: this.state.error ? 'block': 'none'}}>
-          <h2>{this.state.message}</h2>
-        </div>
+        <MessageBox message={this.state.message} error={this.state.error} />
+        <Nav />
         <div>
           <ul>
             {

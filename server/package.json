@@ -1,0 +1,26 @@
+{
+  "name": "auto-club-server",
+  "version": "1.0.0",
+  "description": "Node js server for AutoClub API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./config/initializers/server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node ./lib/scripts/seed.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.4.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "content-filter": "^1.1.1",
+    "cookie-parser": "^1.4.3",
+    "cookieparser": "^0.1.0",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.9",
+    "secure-random": "^1.1.1"
+  }
+}

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './EventList.css';
 import { baseUrl } from '../../../helpers';
 import EventTeaser from '../EventTeaser/EventTeaser';
+import FrontCta from '../FrontCta/FrontCta';
+import MessageBox from '../MessageBox/MessageBox';
+import RunGroup from '../RunGroup/RunGroup';
+import Nav from "../Nav/Nav";
 
 class EventList extends Component {
 
@@ -32,11 +36,13 @@ class EventList extends Component {
   render() {
     return (
       <div>
-        <div className="error" style={{ display: this.state.error ? 'block': 'none'}}>
-          <h2>{this.state.message}</h2>
+          <MessageBox message={this.state.message} error={this.state.error} />
+          <Nav />
+        <div className="event-list__cta">
+          <FrontCta />
         </div>
-        <div>
-          <ul>
+        <div className="event-list__container">
+          <ul className="list pl0">
             {
               this.state.events.map(function(event) {
                   return <EventTeaser key={event.id} details={event} />

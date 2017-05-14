@@ -1,0 +1,59 @@
+.fw6 {
+    font-weight: 600;
+    color: black;
+}
+
+.sm-txt {
+  font-size: 10px !important;
+}
+
+.lh-copy {
+    line-height: 1.5;
+}
+
+.wh-bk {
+  color: black;
+}
+
+.mw8 {
+    max-width: 64rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.pa3 {
+    padding: 1rem;
+    color: black;
+}
+
+.pa4 {
+    padding: 2rem;
+}
+
+.stripe-dark {
+  background-color: white;
+}
+
+.tl {
+    text-align: left;
+}
+
+.f6 {
+    font-size: .875rem;
+    max-width: 400px;
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.center-txt {
+  text-align: center;
+}
