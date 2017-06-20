@@ -11,6 +11,7 @@ var mongoose = require('mongoose'), Schema = mongoose.Schema; var eventSchema = 
   regIsOpen: Boolean,
   signUpIsVisible: Boolean,
   createdBy: String,
+  notes: [{type:Schema.ObjectId, ref:"Note"}],
   drivers: [{type:Schema.ObjectId, ref:'Driver'}],
   changeLog: [{type:Schema.ObjectId, ref:'Change'}]
 },

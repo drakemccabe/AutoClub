@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Badge, Button, Select, Row, Col, Card, Timeline, Table } from 'antd';
+import { Icon, Progress, Badge,  Popconfirm, message, Button, Switch, Select, Row, Col, Card, Timeline, Table } from 'antd';
 import moment from 'moment';
 import { baseUrl } from '../../../helpers';
 
@@ -96,8 +96,6 @@ class ShowEvent extends Component {
     }).then(function(response){
       return response.json();
     }).then(function(res) {
-      res.results[0].drivers[0].notes = [1,2,3];
-      res.results[0].drivers = [res.results[0].drivers[0]]
       that.setState({
         event: res.results[0],
         error: res.status.code != 200,
@@ -124,15 +122,56 @@ class ShowEvent extends Component {
     return (
       <div>
         <Row>
-          <Col span={12}>
+          <Col span={8}>
             <div>
               <p>{this.state.event.name}</p>
-              <p>Card content</p>
-              <p>Card content</p>
+              <p>Location: {this.state.event.location}</p>
+              <p>Price: {this.state.event.price}</p>
+              <p>Date: {this.state.event.date}</p>
+                <p><Button type="primary" icon="download">Download</Button></p>
             </div>
           </Col>
-          <Col span={12}>
-
+          <Col span={6}>
+            <Row>
+              <Col span={24}>
+                <p>Created At: {this.state.event.createdAt}</p>
+                <p>Driver Limit: {this.state.event.driverLimit}</p>
+                <p>Drivers Registered: {this.state.event.drivers.length}</p>
+                <p>Created By: {this.state.event.createdBy}</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={12}>
+                Allow Registration?
+              </Col>
+              <Col span={12}>
+                <Switch defaultChecked={!this.state.event.regIsOpen} />
+              </Col>
+            </Row>
+            <Row>
+              <Col span={12}>
+                Show on Schedule?
+              </Col>
+              <Col span={12}>
+                <Switch defaultChecked={!this.state.event.signUpIsVisible} />
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <Popconfirm title="Are you sure delete this task?" onConfirm={ () => ''} onCancel={ () => ''} okText="Yes" cancelText="No">
+                  <Button type="danger">Delete Event</Button>
+                </Popconfirm>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={6}>
+            <img style={{ maxWidth: "100%" }} src={this.state.event.image} />
+          </Col>
+          <Col span={4}>
+            <Progress
+              type="circle"
+              percent={this.state.event.drivers.length / this.state.event.driverLimit * 100}
+              format={ () => this.state.event.drivers.length } />
           </Col>
         </Row>
         <Row>

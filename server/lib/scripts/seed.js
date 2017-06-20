@@ -34,6 +34,7 @@ q.drain = function() {
           name: "test_driver_" + rand(),
           email: "test_driver_" + rand() + "@gmail.com",
           address: "02114",
+          notes: [],
           car: "350z",
           addedBy: "DB_SEED",
           paymentRef: null,

@@ -18,13 +18,13 @@ class EventShow extends Component {
 
   componentDidMount() {
     const that = this;
-    fetch(baseUrl() + "/fetch/events/22", {
+    fetch(baseUrl() + "/api/events/" + that.props.params.eventId, {
       method: 'get'
     }).then(function(response){
       return response.json();
     }).then(function(res) {
       that.setState({
-        events: res.results,
+        events: res.results[0],
         error: res.status.code != 200,
         message: res.status.message
       })

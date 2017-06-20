@@ -5,6 +5,7 @@ var driverSchema = new Schema({
   name: String,
   email: String,
   address: String,
+  notes: [{type:Schema.ObjectId, ref: 'Note'}],
   car: String,
   addedBy: String,
   paymentRef: String,

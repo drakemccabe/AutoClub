@@ -59,6 +59,8 @@ class BackEndContainer extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
 
+              <NewEvent />
+
 
               <ShowEvent />
 

@@ -30,4 +30,28 @@ router.route('/events').get(function(req, res, next) {
 
 });
 
+
+router.route('/events/:id').get(function(req, res, next) {
+
+  mongoose.model('Event').findById(req.params.id, function(err, event) {
+
+    if(err) {
+      return res.json({ status: "error" });
+    } else {
+      return res.json(
+          {
+            status: {
+              code: 200,
+              message: "Success"
+            },
+            count: 1,
+            type: "Event",
+            results: [event]
+          }
+      );
+    }
+  });
+
+});
+
 module.exports = router;
